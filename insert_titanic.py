@@ -1,14 +1,23 @@
 import pandas as pd 
 import psycopg2
 from psycopg2 import extras
+from dotenv import load_dotenv
+import os
 
 df = pd.read_csv('https://raw.githubusercontent.com/LambdaSchool/DS-Unit-3-Sprint-2-SQL-and-Databases/master/module2-sql-for-analysis/titanic.csv')
 print(df.head())
 
-connection = psycopg2.connect(dbname="pfcxenqo",
-                              user="pfcxenqo",
-                              password="fUj3ZYls0t-xpgB_zQEZcaIHTxDGfxZJ",
-                              host="rogue.db.elephantsql.com")
+load_dotenv()
+
+DB_NAME = os.getenv("DB_NAME", default="OOPS!")
+DB_USER = os.getenv("DB_USER", default="OOPS!")
+DB_PASSWORD = os.getenv("DB_PASSWORD", default="OOPS!")
+DB_HOST = os.getenv("DB_HOST", default="OOPS!")
+
+connection = psycopg2.connect(dbname=DB_NAME,
+                              user=DB_USER,
+                              password=DB_PASSWORD,
+                              host=DB_HOST)
 
 curseur = connection.cursor()
 
